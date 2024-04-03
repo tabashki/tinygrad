@@ -1,7 +1,4 @@
 name: Metal-only Unit Tests
-env:
-  # increment this when downloads substantially change to avoid the internet
-  DOWNLOAD_CACHE_VERSION: '4'
 
 on:
   push:
