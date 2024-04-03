@@ -2,6 +2,7 @@ from __future__ import annotations
 import os, subprocess, pathlib, ctypes, tempfile, functools
 import Metal, libdispatch
 from Cocoa import NSURL
+from hexdump import hexdump
 from typing import List, Set, Any, Tuple, Optional
 from tinygrad.helpers import prod, getenv, DEBUG, unwrap2
 from tinygrad.device import Compiled, LRUAllocator, Compiler, CompilerOptions
@@ -41,7 +42,9 @@ class MetalCompiler(Compiler):
         data = f.read()
       pathlib.Path(tmp).unlink()
       name = library.functionNames()[0]
-      print(f"Kernel: {name} -> compiled size: {len(data)}")
+      if DEBUG >= 7:
+        print(f"Kernel: {name} -> compiled size: {len(data)}")
+        hexdump(data)
       return data
 
 class MetalProgram:

@@ -52,6 +52,7 @@ setup(name='tinygrad',
             "librosa",
             "networkx",
             "hypothesis",
+            "hexdump",
         ],
         'testing_tf': [
             "tensorflow==2.15.1",
