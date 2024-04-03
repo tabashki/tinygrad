@@ -38,7 +38,7 @@ jobs:
     - name: Check Device.DEFAULT (METAL) and print some source
       run: |
         METAL=1 python -c "from tinygrad import Device; assert Device.DEFAULT == 'METAL', Device.DEFAULT"
-        METAL=1 DEBUG=4 FORWARD_ONLY=1 python3 test/test_ops.py TestOps.test_add
+        METAL=1 DEBUG=7 FORWARD_ONLY=1 python3 test/test_ops.py TestOps.test_add
     - name: Run metal test
       run: JIT=2 METAL=1 python -m pytest -n=auto test/ --ignore=test/external --ignore=test/models --durations=20
     - name: Run real world test
