@@ -32,14 +32,16 @@ class MetalCompiler(Compiler):
       comp_desc.setComputeFunction_(fxn)
       ar_desc = Metal.MTLBinaryArchiveDescriptor.new()
       archive = unwrap2(self.device.device.newBinaryArchiveWithDescriptor_error_(ar_desc, None))
-      archive.addComputePipelineFunctionsWithDescriptor_error_(comp_desc, None)
+      assert unwrap2(archive.addComputePipelineFunctionsWithDescriptor_error_(comp_desc, None))
       tmp = tempfile.mktemp()
       url = NSURL.fileURLWithPath_(tmp)
-      archive.serializeToURL_error_(url, None)
+      assert unwrap2(archive.serializeToURL_error_(url, None))
       data = None
       with open(tmp, "rb") as f:
         data = f.read()
       pathlib.Path(tmp).unlink()
+      name = library.functionNames()[0]
+      print(f"Kernel: {name} -> compiled size: {len(data)}")
       return data
 
 class MetalProgram:
